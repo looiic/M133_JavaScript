@@ -1,0 +1,42 @@
+$(function(){
+
+
+  var vname, nname, strasse, plz, ort, email;
+
+
+  $('#button').click(action);
+  $('#input').keypress(function (e) {
+  if (e.which == 13) {
+    action();
+  }
+});
+
+
+  function action() {
+    $('#content').find("tr:gt(0)").remove();
+    var statement = $('#input').val();
+    if (statement == ""){
+      $('#content').before('<p style=\"color:red\" id=\"alert\">Bitte einen Wert eingeben...</p>');
+    }else{
+      $('#alert').remove();
+      $.getJSON('http://localhost/jsonl.php?name=' + statement , function(result){
+          if(result == null){
+            $('#content').before('<p style=\"color:red\" id=\"alert\">Keine Einträge gefunden</p>');
+          }else{
+            $.each(result, function(i, field){
+              vname = field.vorname;
+              nname = field.nachname;
+              strasse = field.strasse;
+              plz = field.plz;
+              ort = field.ort;
+              email = field.email;
+              $('#content tr:last').after('<tr><td>'+vname+'</td><td>'+nname+'</td><td>'+strasse+'</td><td>'+plz+'</td><td>'+ort+'</td><td>'+email+'</td></tr>');
+            });
+          }
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        $('#content').before('<p style=\"color:red\" id=\"alert\">AJAX Fehler: ' + textStatus + '</p>');
+      });
+    }
+  }
+
+});

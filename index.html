@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Stundenplan</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  </head>
+  <body class="container">
+
+    <label for="beruf">Beruf auswählen: </label>
+    <select class="form-control" id="beruf">
+      <option value="0" disabled selected value>Bitte Beruf auswählen...</option>
+    </select>
+    
+
+    <div id="divKlasse" style="display:none;">
+      <label for="klasse">Beruf auswählen: </label>
+      <select class="form-control" id="klasse">
+        <option value="0" disabled selected value>Bitte Klasse auswählen...</option>
+      </select>
+    </div>
+
+    <div id="divDate" class="btn-group" style="display:none;">
+      <button type="button" class="btn btn-primary"><</button>
+      <button type="button" class="btn btn-primary" disabled>Samsung</button>
+      <button type="button" class="btn btn-primary">></button>
+    </div>
+
+    <div id="divTable" style="display:none;">
+      <table class="table table-striped" id="table">
+        <thead>
+          <tr>
+            <th>Datum</th>
+            <th>Wochentag</th>
+            <th>Von</th>
+            <th>Bis</th>
+            <th>Lehrer</th>
+            <th>Fach</th>
+            <th>Raum</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+  </body>
+</html>
