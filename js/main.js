@@ -1,6 +1,5 @@
 $(function(){
 
-  var selectedWeek;
   getTodayWeek();
   getBerufe();
 
@@ -21,6 +20,7 @@ $(function(){
       selectedWeek = weeks + '-' + selectedWeek.split('-')[1];
     }
     $('#weekButton').html(selectedWeek);
+    $("#divTable").hide(100);
     getTable();
   }
 
@@ -35,33 +35,47 @@ $(function(){
       selectedWeek = weeks + '-' + selectedWeek.split('-')[1];
     }
     $('#weekButton').html(selectedWeek);
+    $("#divTable").hide(100);
     getTable();
   }
 
+  //Gibt die jetztige Woche zurück mit dem Jahr im WW-YYYY Format
+  //Hab keine fertige Funktion gefunden, die das macht deshalb errechne ich es selber
   function getTodayWeek(){
+    //Datum von Heute holen
     var today = new Date();
 
-    var thisYear = today.getFullYear();
-    var time1970 = today.getTime();
-
-    var milisecInYear = today.getTime() - ( ( today.getFullYear() - 1970 ) * 31536000000 );//31536000000 is one Year
-    milisecInYear = milisecInYear - (( today.getDay() + 1 ) * 86400000) //86400000 is one Day
-    var week = milisecInYear / 604800000;//604800000 is one Week
+    //Die Millisekunden holen, welche im aktuellen Jahr schon vergangen sind
+    var milisecInYear = today.getTime() - ( ( today.getFullYear() - 1970 ) * 31536000000 );//31536000000 ist 1 Jahr in Millisekunden
+    //Die Millisekunden holen vom Anfang dieser Woche
+    milisecInYear = milisecInYear - (( today.getDay() + 1 ) * 86400000) //86400000 ist 1 Tag in Millisekunden
+    //Die vergangenen Millisekunden vom Anfang dieser Woche durch Wochen teilen --> gibt Anzahl vergangenen Wochen
+    var week = milisecInYear / 604800000;//604800000 ist 1 Woche in Millisekunden
+    //Runden und zur korrektur -1 rechnen
     week = Math.round(week)-1;
     week = week + '-' + today.getFullYear();
+    //In den Button einsetzen
     $('#weekButton').html(week);
   }
 
   function getTable(){
+    var tage = {
+      1: 'Montag',
+      2: 'Dienstag',
+      3: 'Mittwoch',
+      4: 'Donnerstag',
+      5: 'Freitag',
+      6: 'Samstag',
+      7: 'Sonntag'
+    };
     var selectedKlasse = $('#klasse').val();
     var thisWeek = $('#weekButton').html();
+    $('#divDate').show();
+    $('#divTable').show(100);
     $.getJSON('http://home.gibm.ch/interfaces/133/tafel.php?klasse_id=' + selectedKlasse + '&woche=' + thisWeek, function(result){
-          $('#divTable').show();
           $('#table').find("tr:gt(0)").remove();
-          console.log(result);
           $.each(result, function(i, field){
-            console.log(field);
-            var tr = '<tr><td>' + field.tafel_datum + '</td><td>' + field.tafel_wochentag + '</td><td>' + field.tafel_von + '</td><td>' + field.tafel_bis
+            var tr = '<tr><td>' + field.tafel_datum + '</td><td>' + tage[field.tafel_wochentag] + '</td><td>' + field.tafel_von + '</td><td>' + field.tafel_bis
              + '</td><td>' + field.tafel_lehrer + '</td><td>' + field.tafel_fach + '</td><td>' + field.tafel_raum + '</td></tr>';
             $('#table').append(tr);
           });
@@ -74,6 +88,9 @@ $(function(){
 
   function getKlassen(){
     var selectedBeruf = $('#beruf').val();
+    $('#divTable').hide();
+    $('#divDate').hide();
+    $('#klasse option[value="0"]').prop('selected',true);
     $.getJSON('http://home.gibm.ch/interfaces/133/klassen.php?beruf_id=' + selectedBeruf, function(result){
           $('#divKlasse').show();
           $('#klasse').find("option:gt(0)").remove();
