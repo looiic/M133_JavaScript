@@ -11,7 +11,7 @@
     <select class="form-control" id="beruf">
       <option value="0" disabled selected value>Bitte Beruf auswählen...</option>
     </select>
-    
+
 
     <div id="divKlasse" style="display:none;">
       <label for="klasse">Beruf auswählen: </label>
@@ -20,28 +20,33 @@
       </select>
     </div>
 
-    <div id="divDate" class="btn-group" style="display:none;">
-      <button type="button" class="btn btn-primary"><</button>
-      <button type="button" class="btn btn-primary" disabled>Samsung</button>
-      <button type="button" class="btn btn-primary">></button>
-    </div>
+    <div id="divTable" class="conatiner" style="text-align:center; display:none; margin: 2%">
 
-    <div id="divTable" style="display:none;">
-      <table class="table table-striped" id="table">
-        <thead>
-          <tr>
-            <th>Datum</th>
-            <th>Wochentag</th>
-            <th>Von</th>
-            <th>Bis</th>
-            <th>Lehrer</th>
-            <th>Fach</th>
-            <th>Raum</th>
-          </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+      <div class="btn-group">
+        <button id="minus" type="button" class="btn btn-primary"><</button>
+        <button id="weekButton" type="button" class="btn btn-primary" disabled></button>
+        <button id="plus" type="button" class="btn btn-primary">></button>
+      </div>
+
+
+      <div>
+        <table class="table table-striped" id="table">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Wochentag</th>
+              <th>Von</th>
+              <th>Bis</th>
+              <th>Lehrer</th>
+              <th>Fach</th>
+              <th>Raum</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

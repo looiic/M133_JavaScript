@@ -40,3 +40,10 @@ $(function(){
   }
 
 });
+
+
+bei der funktion plusWeek hat es immer als String angeschaut und daher zb beim Jahr wenn 2017 + 1 gerechnet wurde 20171 angezeigt und nicht 2018... dies konnte ich mit parseInt lösen
+
+die globale variabel für selectedWeek hat nicht funktioniert. aus irgendeinem grund ist wenn man in die methode getTable hinein kommt (über den actionlistener) das "this" nicht die
+webseite sondern nur den selectbox. daher kann ich mit this.<variabelname> nicht auf meine globalen variabeln zugreiffen. ich hab das gelöst indem ich die woche immer in den button
+hineingeschrieben habe und dort wieder ausgelesen, wenn ich ihn brauchte...
