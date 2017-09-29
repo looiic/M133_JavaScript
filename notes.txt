@@ -47,3 +47,11 @@ bei der funktion plusWeek hat es immer als String angeschaut und daher zb beim J
 die globale variabel für selectedWeek hat nicht funktioniert. aus irgendeinem grund ist wenn man in die methode getTable hinein kommt (über den actionlistener) das "this" nicht die
 webseite sondern nur den selectbox. daher kann ich mit this.<variabelname> nicht auf meine globalen variabeln zugreiffen. ich hab das gelöst indem ich die woche immer in den button
 hineingeschrieben habe und dort wieder ausgelesen, wenn ich ihn brauchte...
+
+29.09
+heute wollte ich cookies einbauen. ist aber nicht so einfach wie ich dachte. jquery alleine unterstützt dies nicht (kann nicht verstehen wieso nicht?!). aber es gibt
+plugin für jquery von einem drittanbieter das sehr vielversprechend tönt. man soll ganz einfach cookies setzten und lesen können. ich hab das plugin hinzugefügt und
+meinen code geschrieben aber es passiert nichts. nach langem debuggen und googlen hab ich dann herausgefunden, dass chrome dieses plugin nicht unterstützt.
+also weg mit dem plugin und ich mach es mit javascript. aber auch hier geht es nicht in chrome, so wechselte ich auf microsoft edge..
+
+jetzt hab ich riesige probleme mit ajax da der aufruf asynchron ist. 
