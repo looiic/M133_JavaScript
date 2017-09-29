@@ -99,7 +99,7 @@ $(function(){
             $('#table').append(tr);
           });
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      alert('Fehler');
+      alert('Fehler beim holen des Stundenplanes: ' + textStatus);
     });
   }
 
@@ -125,7 +125,7 @@ $(function(){
           });
           var klasse = getCookie('klasse');
           var week = getCookie('week');
-          if(klasse != "" && week != ""){
+          if(klasse != null && week != null){
             $('#klasse').val(klasse);
             $('#weekButton').html(week);
             $('#divDate').show();
@@ -133,7 +133,7 @@ $(function(){
             getTable();
           }
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      alert('Fehler');
+      alert('Fehler beim holen der Klassen: ' + textStatus);
     });
 
   }
@@ -148,13 +148,13 @@ $(function(){
               }));
             });
             var beruf = getCookie('beruf');
-            if (beruf != ""){
+            if (beruf != null){
               $('#beruf').val(beruf);
               $('#divKlasse').show();
               getKlassen();
             }
       }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert('Fehler')
+        alert('Fehler beim holen der Berufe: ' + textStatus)
       });
     }
 
@@ -165,15 +165,19 @@ $(function(){
   //Gibt den Wert eines Cookies zurück
   function getCookie(name) {
     name = name + "=";
+    //Cookies holen und Sonderzeichen entcoden
     var cookie = decodeURIComponent(document.cookie);
+    //Cookies trennen und in Array schreiben
     cookie = cookie.split(';');
+    //auf alle Cookies loopen
     for(var i = 0; i < cookie.length; i++) {
         var c = cookie[i];
+        //Fängt Cookie mit name an
         if (c.indexOf(name) == 0) {
+            //gibt den string nach dem gleichzeichen zurück vom Cookie
             return c.substring(name.length, c.length);
         }
     }
-    return "";
   }
 
 
