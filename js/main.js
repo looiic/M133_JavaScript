@@ -58,7 +58,7 @@ $(function(){
     //Die Millisekunden holen, welche im aktuellen Jahr schon vergangen sind
     var milisecInYear = today.getTime() - ( ( today.getFullYear() - 1970 ) * 31536000000 );//31536000000 ist 1 Jahr in Millisekunden
     //Die Millisekunden holen vom Anfang dieser Woche
-    milisecInYear = milisecInYear - (( today.getDay() + 1 ) * 86400000) //86400000 ist 1 Tag in Millisekunden
+    milisecInYear = milisecInYear - (( today.getDay() + 1 ) * 86400000); //86400000 ist 1 Tag in Millisekunden
     //Die vergangenen Millisekunden vom Anfang dieser Woche durch Wochen teilen --> gibt Anzahl vergangenen Wochen
     var week = milisecInYear / 604800000;//604800000 ist 1 Woche in Millisekunden
     //Runden und zur korrektur -1 rechnen
@@ -92,12 +92,19 @@ $(function(){
     $.getJSON('http://home.gibm.ch/interfaces/133/tafel.php?klasse_id=' + selectedKlasse + '&woche=' + thisWeek, function(result){
           //Alles aus der Table löschen ausser Header
           $('#table').find("tr:gt(0)").remove();
-          $.each(result, function(i, field){
-            //Table-Rows hinzufügen
-            var tr = '<tr><td>' + field.tafel_datum + '</td><td>' + tage[field.tafel_wochentag] + '</td><td>' + field.tafel_von + '</td><td>' + field.tafel_bis
-             + '</td><td>' + field.tafel_lehrer + '</td><td>' + field.tafel_fach + '</td><td>' + field.tafel_raum + '</td></tr>';
-            $('#table').append(tr);
-          });
+          $('#meldung').remove();
+          //Ist Anwort leer?
+          if (result != ""){
+            $.each(result, function(i, field){
+              //Table-Rows hinzufügen
+              var tr = '<tr><td>' + field.tafel_datum + '</td><td>' + tage[field.tafel_wochentag] + '</td><td>' + field.tafel_von + '</td><td>' + field.tafel_bis
+               + '</td><td>' + field.tafel_lehrer + '</td><td>' + field.tafel_fach + '</td><td>' + field.tafel_raum + '</td></tr>';
+              $('#table').append(tr);
+            });
+          }else{
+            //Antwort ist leer. D.h. es sind Schulferien
+            $('#table').after('<p id="meldung">Keine Daten: Ferien</p>')
+          }
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert('Fehler beim holen des Stundenplanes: ' + textStatus);
     });
@@ -108,7 +115,7 @@ $(function(){
   function getKlassen(){
     var selectedBeruf = $('#beruf').val();
     //Falls schonmal ein Stundenplan ausgewählt wurde wird dieser hier wieder versteckt
-    $('#divTable').hide();
+    $('#divTable').hide(100);
     $('#divDate').hide();
     //Selectbox soll als vorauswahl die Option mit value=0 haben --> 'Bitte Klasse auswählen'
     $('#klasse option[value="0"]').prop('selected',true);
@@ -129,7 +136,7 @@ $(function(){
             $('#klasse').val(klasse);
             $('#weekButton').html(week);
             $('#divDate').show();
-            $('#divTable').show();
+            $('#divTable').show(100);
             getTable();
           }
     }).fail(function(jqXHR, textStatus, errorThrown) {

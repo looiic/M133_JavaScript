@@ -4,32 +4,38 @@
     <meta charset="utf-8">
     <title>Stundenplan</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   </head>
   <body class="container">
+    <h1>Stundenpläne GIBM</h1>
 
     <label for="beruf">Beruf auswählen: </label>
     <select class="form-control" id="beruf">
-      <option value="0" disabled selected value>Bitte Beruf auswählen...</option>
+      <option value="0" disabled selected>Bitte Beruf auswählen...</option>
     </select>
 
+    <br>
 
     <div id="divKlasse" style="display:none;">
-      <label for="klasse">Beruf auswählen: </label>
+      <label for="klasse">Klasse auswählen: </label>
       <select class="form-control" id="klasse">
-        <option value="0" disabled selected value>Bitte Klasse auswählen...</option>
+        <option value="0" disabled selected>Bitte Klasse auswählen...</option>
       </select>
     </div>
+
+    <br>
 
     <div class="conatiner" style="text-align:center; margin: 2%">
 
       <div id="divDate" class="btn-group" style="display:none">
-        <button id="minus" type="button" class="btn btn-primary"><</button>
+        <button id="minus" type="button" class="btn btn-primary">&lt;</button>
         <button id="weekButton" type="button" class="btn btn-primary" disabled></button>
-        <button id="plus" type="button" class="btn btn-primary">></button>
+        <button id="plus" type="button" class="btn btn-primary">&gt;</button>
       </div>
 
+      <br>
 
-      <div id="divTable" style="display:none">
+      <div id="divTable" style="display:none;overflow-x: auto;white-space: nowrap;">
         <table class="table table-striped" id="table">
           <thead>
             <tr>
@@ -50,7 +56,6 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
   </body>
 </html>
