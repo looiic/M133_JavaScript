@@ -178,7 +178,7 @@ $(function(){
     cookie = cookie.split(';');
     //auf alle Cookies loopen
     for(var i = 0; i < cookie.length; i++) {
-        var c = cookie[i];
+        var c = cookie[i].trim();
         //Fängt Cookie mit name an
         if (c.indexOf(name) == 0) {
             //gibt den string nach dem gleichzeichen zurück vom Cookie
