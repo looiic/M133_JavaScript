@@ -120,7 +120,7 @@ $(function(){
     //Selectbox soll als vorauswahl die Option mit value=0 haben --> 'Bitte Klasse auswählen'
     $('#klasse option[value="0"]').prop('selected',true);
     $.getJSON('http://home.gibm.ch/interfaces/133/klassen.php?beruf_id=' + selectedBeruf, function(result){
-          $('#divKlasse').show();
+          $('#divKlasse').show(100);
           //Alle vorherigen einträge in der Selectbox entfernen ausser Header
           $('#klasse').find("option:gt(0)").remove();
           $.each(result, function(i, field){
