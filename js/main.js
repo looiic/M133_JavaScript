@@ -9,6 +9,8 @@ $(function(){
   $('#plus').on('click', plusWeek);
   $('#minus').on('click', minusWeek);
 
+  var readCookies = false;
+
 
 //Wenn Button für eine Woche nach vorne gedrückt wird. Rechnet plus eine Woche und aktualisiert den Stundenplan
   function plusWeek(){
@@ -132,7 +134,7 @@ $(function(){
           });
           var klasse = getCookie('klasse');
           var week = getCookie('week');
-          if(klasse != null && week != null){
+          if(klasse != null && week != null && readCookies){
             $('#klasse').val(klasse);
             $('#weekButton').html(week);
             $('#divDate').show();
@@ -156,6 +158,7 @@ $(function(){
             });
             var beruf = getCookie('beruf');
             if (beruf != null){
+              readCookies = true;
               $('#beruf').val(beruf);
               $('#divKlasse').show();
               getKlassen();
