@@ -158,6 +158,7 @@ $(function(){
             });
             var beruf = getCookie('beruf');
             if (beruf != null){
+              //Cookies sollen nur gelesen werden, wenn Seite neu geladen wurde und nicht wenn man einfach den Beruf ändert
               readCookies = true;
               $('#beruf').val(beruf);
               $('#divKlasse').show();
