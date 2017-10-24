@@ -105,7 +105,7 @@ $(function(){
             });
           }else{
             //Antwort ist leer. D.h. es sind Schulferien
-            $('#table').after('<p id="meldung">Keine Daten: Ferien</p>')
+            $('#table').after('<p id="meldung">Keine Daten: Ferien</p>');
           }
     }).fail(function(jqXHR, textStatus, errorThrown) {
       alert('Fehler beim holen des Stundenplanes: ' + textStatus);
@@ -165,7 +165,7 @@ $(function(){
               getKlassen();
             }
       }).fail(function(jqXHR, textStatus, errorThrown) {
-        alert('Fehler beim holen der Berufe: ' + textStatus)
+        alert('Fehler beim holen der Berufe: ' + textStatus);
       });
     }
 
